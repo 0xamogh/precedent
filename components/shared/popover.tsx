@@ -6,19 +6,21 @@ import Leaflet from "./leaflet";
 export default function Popover({
   children,
   content,
+  className,
   align = "center",
   openPopover,
   setOpenPopover,
 }: {
   children: ReactNode;
   content: ReactNode | string;
+  className?: string;
   align?: "center" | "start" | "end";
   openPopover: boolean;
   setOpenPopover: Dispatch<SetStateAction<boolean>>;
 }) {
   const { isMobile, isDesktop } = useWindowSize();
   return (
-    <>
+    <div className={className}>
       {isMobile && children}
       {openPopover && isMobile && (
         <Leaflet setShow={setOpenPopover}>{content}</Leaflet>
@@ -37,6 +39,6 @@ export default function Popover({
           </PopoverPrimitive.Content>
         </PopoverPrimitive.Root>
       )}
-    </>
+    </div>
   );
 }
